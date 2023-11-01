@@ -1,0 +1,19 @@
+# --------- tensorflow --------- #
+tensorflow>=2.13.0
+nvidia-cudnn-cu11==8.6.0.163
+
+# --------- hydra --------- #
+hydra-core==1.3.2
+hydra-colorlog==1.2.0
+hydra-optuna-sweeper==1.2.0
+
+# --------- others --------- #
+rootutils       # standardizing the project root setup
+pre-commit      # hooks for applying linters on commit
+rich            # beautiful text formatting in terminal
+pytest          # tests
+# sh            # for running bash commands in some tests (linux/macos only)
+
+pyDOE
+scipy
+matplotlib

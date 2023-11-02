@@ -18,7 +18,7 @@
 PINNs-TF2 is a Python package built on the TensorFlow V2 framework. It not only accelerates PINNs implementation but also simplifies user interactions by abstracting complex PDE challenges. We underscore the pivotal role of compilers in PINNs, highlighting their ability to boost performance by up to 119x.
 
 <div align="center">
-<img src="http://drive.google.com/uc?export=view&id=1WVZSSQwFAyNAkSqNgvZqok2vkPhpoERy" width="1000">
+<img src="http://drive.google.com/uc?export=view&id=1vGb-wuPI1bAEsD_5CKtUPUHq8cC1J32X" width="1000">
 </br>
 <em>Each subplot corresponds to a distinct problem, with its iteration count displayed at the
 top. The logarithmic x-axis denotes the speed-up factor w.r.t the original code in TensorFlow v1, and the y-axis illustrates the mean relative error.</em>

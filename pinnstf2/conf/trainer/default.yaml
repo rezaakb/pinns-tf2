@@ -1,4 +1,4 @@
-_target_: pinnstf.trainer.Trainer
+_target_: pinnstf2.trainer.Trainer
 
 default_root_dir: ${paths.output_dir}
 

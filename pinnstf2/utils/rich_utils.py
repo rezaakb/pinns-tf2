@@ -8,7 +8,7 @@ from hydra.core.hydra_config import HydraConfig
 from omegaconf import DictConfig, OmegaConf, open_dict
 from rich.prompt import Prompt
 
-from pinnstf.utils import pylogger
+from pinnstf2.utils import pylogger
 
 log = pylogger.get_pylogger(__name__)
 

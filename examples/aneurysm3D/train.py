@@ -5,7 +5,7 @@ import rootutils
 import numpy as np
 import tensorflow as tf
 
-import pinnstf
+import pinnstf2
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 
@@ -19,7 +19,7 @@ def read_data_fn(root_path):
     :return: Processed data in the form of a PointCloudData object.
     """
 
-    data = pinnstf.utils.load_data(root_path, "Aneurysm3D.mat")
+    data = pinnstf2.utils.load_data(root_path, "Aneurysm3D.mat")
 
     t_star = data["t_star"]  # T x 1
     x_star = data["x_star"]  # N x 1
@@ -32,7 +32,7 @@ def read_data_fn(root_path):
     P_star = data["P_star"]  # N x T
     C_star = data["C_star"]  # N x T
 
-    return pinnstf.data.PointCloudData(
+    return pinnstf2.data.PointCloudData(
         spatial=[x_star, y_star, z_star],
         time=[t_star],
         solution={"u": U_star, "v": V_star, "w": W_star, "p": P_star, "c": C_star},
@@ -61,14 +61,14 @@ def pde_fn(outputs: Dict[str, tf.Tensor],
     shape = tf.shape(Y)
     Y = tf.reshape(Y, [shape[0], -1])
     
-    Y_x = pinnstf.utils.fwd_gradient(Y, x)
-    Y_y = pinnstf.utils.fwd_gradient(Y, y)
-    Y_z = pinnstf.utils.fwd_gradient(Y, z)
-    Y_t = pinnstf.utils.fwd_gradient(Y, t)
+    Y_x = pinnstf2.utils.fwd_gradient(Y, x)
+    Y_y = pinnstf2.utils.fwd_gradient(Y, y)
+    Y_z = pinnstf2.utils.fwd_gradient(Y, z)
+    Y_t = pinnstf2.utils.fwd_gradient(Y, t)
 
-    Y_xx = pinnstf.utils.fwd_gradient(Y_x, x)
-    Y_yy = pinnstf.utils.fwd_gradient(Y_y, y)
-    Y_zz = pinnstf.utils.fwd_gradient(Y_z, z)
+    Y_xx = pinnstf2.utils.fwd_gradient(Y_x, x)
+    Y_yy = pinnstf2.utils.fwd_gradient(Y_y, y)
+    Y_zz = pinnstf2.utils.fwd_gradient(Y_z, z)
 
     c = Y[:,0:1]
     u = Y[:,1:2]
@@ -133,15 +133,15 @@ def main(cfg: DictConfig) -> Optional[float]:
 
     # apply extra utilities
     # (e.g. ask for tags if none are provided in cfg, print cfg tree, etc.)
-    pinnstf.utils.extras(cfg)
+    pinnstf2.utils.extras(cfg)
 
     # train the model
-    metric_dict, _ = pinnstf.train(
+    metric_dict, _ = pinnstf2.train(
         cfg, read_data_fn=read_data_fn, pde_fn=pde_fn, output_fn=None
     )
 
     # safely retrieve metric value for hydra-based hyperparameter optimization
-    metric_value = pinnstf.utils.get_metric_value(
+    metric_value = pinnstf2.utils.get_metric_value(
         metric_dict=metric_dict, metric_names=cfg.get("optimized_metric")
     )
 

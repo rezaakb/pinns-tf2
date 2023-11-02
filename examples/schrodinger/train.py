@@ -6,7 +6,7 @@ import rootutils
 import tensorflow as tf
 from omegaconf import DictConfig
 
-import pinnstf
+import pinnstf2
 
 
 def read_data_fn(root_path):
@@ -16,7 +16,7 @@ def read_data_fn(root_path):
     :return: Processed data will be used in Mesh class.
     """
 
-    data = pinnstf.utils.load_data(root_path, "NLS.mat")
+    data = pinnstf2.utils.load_data(root_path, "NLS.mat")
     exact = data["uu"]
     exact_u = np.real(exact)
     exact_v = np.imag(exact)
@@ -38,11 +38,11 @@ def pde_fn(outputs: Dict[str, tf.Tensor],
            x: tf.Tensor,
            t: tf.Tensor):   
     """Define the partial differential equations (PDEs)."""
-    u_x, u_t = pinnstf.utils.gradient(outputs["u"], [x, t])
-    v_x, v_t = pinnstf.utils.gradient(outputs["v"], [x, t])
+    u_x, u_t = pinnstf2.utils.gradient(outputs["u"], [x, t])
+    v_x, v_t = pinnstf2.utils.gradient(outputs["v"], [x, t])
 
-    u_xx = pinnstf.utils.gradient(u_x, x)
-    v_xx = pinnstf.utils.gradient(v_x, x)
+    u_xx = pinnstf2.utils.gradient(u_x, x)
+    v_xx = pinnstf2.utils.gradient(v_x, x)
 
     outputs["f_u"] = u_t + 0.5 * v_xx + (outputs["u"] ** 2 + outputs["v"] ** 2) * outputs["v"]
     outputs["f_v"] = v_t - 0.5 * u_xx - (outputs["u"] ** 2 + outputs["v"] ** 2) * outputs["u"]
@@ -60,15 +60,15 @@ def main(cfg: DictConfig) -> Optional[float]:
 
     # apply extra utilities
     # (e.g. ask for tags if none are provided in cfg, print cfg tree, etc.)
-    pinnstf.utils.extras(cfg)
+    pinnstf2.utils.extras(cfg)
 
     # train the model
-    metric_dict, _ = pinnstf.train(
+    metric_dict, _ = pinnstf2.train(
         cfg, read_data_fn=read_data_fn, pde_fn=pde_fn, output_fn=output_fn
     )
 
     # safely retrieve metric value for hydra-based hyperparameter optimization
-    metric_value = pinnstf.utils.get_metric_value(
+    metric_value = pinnstf2.utils.get_metric_value(
         metric_dict=metric_dict, metric_names=cfg.get("optimized_metric")
     )
 

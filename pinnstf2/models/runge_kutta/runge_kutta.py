@@ -5,7 +5,7 @@ from typing import Dict, List, Union, Optional
 import numpy as np
 import tensorflow as tf
 
-from pinnstf.utils import load_data_txt
+from pinnstf2.utils import load_data_txt
 
 log = logging.getLogger(__name__)
 

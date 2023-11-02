@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from pinnstf import utils
+from pinnstf2 import utils
 
 from .sampler_base import SamplerBase
 

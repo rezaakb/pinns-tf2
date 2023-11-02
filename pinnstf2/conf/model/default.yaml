@@ -1,4 +1,4 @@
-_target_: pinnstf.models.PINNModule
+_target_: pinnstf2.models.PINNModule
 _partial_: true
 loss_fn: sse
 jit_compile: true

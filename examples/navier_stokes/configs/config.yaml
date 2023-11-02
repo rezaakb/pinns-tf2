@@ -1,17 +1,17 @@
 defaults:
-  - ../../../configs/train
+  - train
   - _self_
 
 n_train: 5_000
 
 mesh:
-  _target_: pinnstf.data.PointCloud
+  _target_: pinnstf2.data.PointCloud
   root_dir: ${paths.data_dir}
   read_data_fn: ???
 
 train_datasets:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       num_sample: ${n_train}
       solution:
@@ -23,7 +23,7 @@ train_datasets:
 
 val_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       solution:
         - u
@@ -32,7 +32,7 @@ val_dataset:
 
 pred_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       idx_t: 100
       solution:
@@ -41,7 +41,7 @@ pred_dataset:
         - p
 
 net:
-  _target_: pinnstf.models.FCN
+  _target_: pinnstf2.models.FCN
   layers: [3, 20, 20, 20, 20, 20, 20, 20, 20, 2]
   output_names:
     - psi
@@ -70,7 +70,11 @@ optimized_metric:
     - l2
 
 plotting:
-  _target_: pinnstf.utils.plot_navier_stokes
+  _target_: pinnstf2.utils.plot_navier_stokes
   _partial_: true
 
 task_name: navier_stokes
+
+hydra:
+  searchpath:
+    - pkg://pinnstf2/conf

@@ -1,5 +1,5 @@
 defaults:
-  - ../../../configs/train
+  - train
   - _self_
 
 idx_t0: 20
@@ -9,24 +9,24 @@ q: 100
 discrete: True
 
 time_domain:
-  _target_: pinnstf.data.TimeDomain
+  _target_: pinnstf2.data.TimeDomain
   t_interval: [0, 1]
   t_points: 201
 
 spatial_domain:
-  _target_: pinnstf.data.Interval
+  _target_: pinnstf2.data.Interval
   x_interval: [-1, 0.99609375]
   shape: [512, 1]
 
 mesh:
-  _target_: pinnstf.data.Mesh
+  _target_: pinnstf2.data.Mesh
   root_dir: ${paths.data_dir}
   read_data_fn: ???
   ub: [1.0, 1.0]
   lb: [-1.0, 0.0]
 
 runge_kutta:
-  _target_: pinnstf.models.RungeKutta
+  _target_: pinnstf2.models.RungeKutta
   root_dir: ${paths.rk_dir}
   q: ${q}
   t1: ${idx_t0}
@@ -35,7 +35,7 @@ runge_kutta:
 
 train_datasets:
   - mesh_sampler:
-      _target_: pinnstf.data.DiscreteMeshSampler
+      _target_: pinnstf2.data.DiscreteMeshSampler
       _partial_: true
       num_sample: ${N}
       idx_t: ${idx_t0}
@@ -44,7 +44,7 @@ train_datasets:
       collection_points:
         - f
   - periodic_boundary_condition:
-      _target_: pinnstf.data.PeriodicBoundaryCondition
+      _target_: pinnstf2.data.PeriodicBoundaryCondition
       _partial_: true
       idx_t: ${idx_t1}
       derivative_order: 1
@@ -54,7 +54,7 @@ train_datasets:
 
 val_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.DiscreteMeshSampler
+      _target_: pinnstf2.data.DiscreteMeshSampler
       _partial_: true
       idx_t: ${idx_t1}
       solution:
@@ -62,14 +62,14 @@ val_dataset:
 
 pred_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.DiscreteMeshSampler
+      _target_: pinnstf2.data.DiscreteMeshSampler
       _partial_: true
       idx_t: ${idx_t1}
       solution:
         - u
 
 net:
-  _target_: pinnstf.models.FCN
+  _target_: pinnstf2.models.FCN
   layers:
     - 1
     - 200
@@ -98,8 +98,12 @@ optimized_metric:
     - u
 
 plotting:
-  _target_: pinnstf.utils.plot_ac
+  _target_: pinnstf2.utils.plot_ac
   _partial_: true
 
 seed: 1234
 task_name: ac
+
+hydra:
+  searchpath:
+    - pkg://pinnstf2/conf

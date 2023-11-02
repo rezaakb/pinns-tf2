@@ -3,8 +3,8 @@ from typing import List, Dict, Callable, Any, Tuple, Union
 import tensorflow as tf
 import sys, os, logging, time
 
-from pinnstf.utils import fwd_gradient, gradient
-from pinnstf.utils import (
+from pinnstf2.utils import fwd_gradient, gradient
+from pinnstf2.utils import (
     fix_extra_variables,
     mse,
     relative_l2_error,
@@ -16,7 +16,7 @@ class PINNModule:
         self,
         net,
         pde_fn: Callable[[Any, ...], tf.Tensor],
-        optimizer: tf.keras.optimizers.Adam,
+        optimizer: tf.keras.optimizers.Adam = tensorflow.keras.optimizers.Adam,
         loss_fn: str = "sse",
         extra_variables: Dict[str, Any] = None,
         output_fn: Callable[[Any, ...], tf.Tensor] = None,
@@ -25,16 +25,19 @@ class PINNModule:
         amp: bool = False,
         dtype: str = 'float32'
     ) -> None:
-        """Initialize a `PINNModule`.
+        """
+        Initialize a `PINNModule`.
 
-        :param net: The model to train.
-        :param pde_fn: PDE function.
-        :param optimizer: The optimizer to use for training.
-        :param extra_variables: Extra variables should be in a dictionary.
-        :param loss_fn: PDE function will apply on the collection points.
-        :param output_fn: Output function will apply on the output of the net.
-        :param runge_kutta: Runge–Kutta method will be used in discrete problems.
-        :param jit_compile: Whether to use JIT compiler.
+        :param net: The neural network model to be used for approximating solutions.
+        :param pde_fn: The partial differential equation (PDE) function defining the PDE to solve.
+        :param optimizer: The optimizer used for training the neural network.
+        :param loss_fn: The name of the loss function to be used. Default is 'sse' (sum of squared errors).
+        :param extra_variables: Additional variables used in the model, provided as a dictionary. Default is None.
+        :param output_fn: A function applied to the output of the network, for post-processing or transformations.
+        :param runge_kutta: An optional Runge-Kutta method implementation for solving discrete problems. Default is None.
+        :param jit_compile: If True, TensorFlow's JIT compiler will be used for optimizing computations. Default is True.
+        :param amp: Automatic mixed precision (amp) for optimizing training performance. Default is False.
+        :param dtype: Data type to be used for the computations. Default is 'float32'.
         """
         super().__init__()
         
@@ -114,18 +117,29 @@ class PINNModule:
         return loss, preds
 
     def train_step(self, batch):
-        
+        """
+        Performs a single training step, including forward and backward passes.
+    
+        :param batch: The input batch of data for training.
+        :return: The calculated loss and any extra variables to be used outside.
+        """
+
+        # Use GradientTape for automatic differentiation - to record operations for the forward pass
         with tf.GradientTape() as tape:
             loss, pred = self.model_step(batch)
+
+            # If automatic mixed precision (amp) is enabled, scale the loss to prevent underflow
             if self.amp:
                 scaled_loss = self.opt.get_scaled_loss(loss)
-            
+
+        # If amp is enabled, compute gradients w.r.t the scaled loss
         if self.amp:
             scaled_grad = tape.gradient(scaled_loss, self.trainable_variables)
             gradients = self.opt.get_unscaled_gradients(scaled_grad)
         else:
             gradients = tape.gradient(loss, self.trainable_variables)
-        
+
+        # Apply the calculated gradients to the model's trainable parameters
         self.opt.apply_gradients(zip(gradients, self.trainable_variables))   
         
         return loss, self.extra_variables

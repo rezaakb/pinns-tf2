@@ -1,23 +1,23 @@
 defaults:
-  - ../../../configs/train
+  - train
   - _self_
 
 batch_size: 8192
 
 mesh:
-  _target_: pinnstf.data.PointCloud
+  _target_: pinnstf2.data.PointCloud
   root_dir: ${paths.data_dir}
   read_data_fn: ???
 
 train_datasets:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       solution:
         - c
 
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       collection_points:
         - e1
@@ -29,7 +29,7 @@ train_datasets:
 
 val_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       idx_t: 100
       solution:
@@ -41,7 +41,7 @@ val_dataset:
 
 test_dataset:
   - mesh_sampler:
-      _target_: pinnstf.data.MeshSampler
+      _target_: pinnstf2.data.MeshSampler
       _partial_: true
       idx_t: 100
       solution:
@@ -52,7 +52,7 @@ test_dataset:
         - p
 
 net:
-  _target_: pinnstf.models.NetHFM
+  _target_: pinnstf2.models.NetHFM
   layers: [4, 250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 5]
   output_names:
     - c
@@ -82,3 +82,7 @@ optimized_metric:
     - p
 
 task_name: aneurysm3D
+
+hydra:
+  searchpath:
+    - pkg://pinnstf2/conf

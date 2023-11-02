@@ -11,10 +11,10 @@ from omegaconf import DictConfig, OmegaConf
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 
-from pinnstf.trainer import Trainer
-from pinnstf import utils
-from pinnstf.models import PINNModule
-from pinnstf.data import (
+from pinnstf2.trainer import Trainer
+from pinnstf2 import utils
+from pinnstf2.models import PINNModule
+from pinnstf2.data import (
     Interval,
     Mesh,
     PointCloud,
@@ -61,11 +61,11 @@ def train(
         )
 
     log.info(f"Instantiating mesh <{cfg.mesh._target_}>")
-    if cfg.mesh._target_ == "pinnstf.data.Mesh":
+    if cfg.mesh._target_ == "pinnstf2.data.Mesh":
         mesh: Mesh = hydra.utils.instantiate(
             cfg.mesh, time_domain=td, spatial_domain=sd, read_data_fn=read_data_fn
         )
-    elif cfg.mesh._target_ == "pinnstf.data.PointCloud":
+    elif cfg.mesh._target_ == "pinnstf2.data.PointCloud":
         mesh: PointCloud = hydra.utils.instantiate(cfg.mesh, read_data_fn=read_data_fn)
     else:
         raise "Mesh should be defined in config file."
@@ -107,10 +107,10 @@ def train(
         batch_size=cfg.get("batch_size"),
     )
 
-    if cfg.net._target_ == "pinnstf.models.FCN":
+    if cfg.net._target_ == "pinnstf2.models.FCN":
         log.info(f"Instantiating neural net <{cfg.net._target_}>")
         net = hydra.utils.instantiate(cfg.net)(lb=mesh.lb, ub=mesh.ub, dtype = cfg.dtype)
-    elif cfg.net._target_ == "pinnstf.models.NetHFM":
+    elif cfg.net._target_ == "pinnstf2.models.NetHFM":
         # TODO
         log.info(f"Instantiating neural net <{cfg.net._target_}>")
         net = hydra.utils.instantiate(cfg.net)(

@@ -1,5 +1,5 @@
 defaults:
-  - ../../../configs/train
+  - train
   - _self_
 
 N0: 50
@@ -82,3 +82,7 @@ plotting:
 
 seed: 1234
 task_name: burgers_continuous_forward
+
+hydra:
+  searchpath:
+    - pkg://pinnstf2/conf

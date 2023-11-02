@@ -8,7 +8,7 @@ import requests
 import scipy
 from omegaconf import DictConfig, open_dict
 
-from pinnstf.utils import pylogger, rich_utils
+from pinnstf2.utils import pylogger, rich_utils
 
 log = pylogger.get_pylogger(__name__)
 

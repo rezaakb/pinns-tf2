@@ -3,7 +3,7 @@ from typing import Callable, List, Union
 import numpy as np
 from pyDOE import lhs
 
-from pinnstf.data import Interval, Rectangle, RectangularPrism, TimeDomain
+from pinnstf2.data import Interval, Rectangle, RectangularPrism, TimeDomain
 
 
 class MeshBase:

@@ -165,17 +165,7 @@ def train(
             preds_dict = trainer.predict(
                 model=model, datamodule=datamodule
             )
-            '''
-            preds_dict = {}
-            for preds in preds_list:
-                for sol_key, pred in preds.items():
-                    if sol_key in preds_dict.keys():
-                        preds_dict[sol_key] = torch.cat((preds_dict[sol_key], pred), 0)
-                    else:
-                        preds_dict[sol_key] = pred
-            '''
-            for sol_key, pred in preds_dict.items():
-                preds_dict[sol_key] = pred.numpy()
+            preds_dict = utils.fix_predictions(preds_dict)
             hydra.utils.instantiate(
                 cfg.plotting,
                 mesh=mesh,

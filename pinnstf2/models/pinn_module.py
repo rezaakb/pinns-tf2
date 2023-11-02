@@ -16,7 +16,7 @@ class PINNModule:
         self,
         net,
         pde_fn: Callable[[Any, ...], tf.Tensor],
-        optimizer: tf.keras.optimizers.Adam = tensorflow.keras.optimizers.Adam,
+        optimizer: tf.keras.optimizers.Adam = tf.keras.optimizers.Adam,
         loss_fn: str = "sse",
         extra_variables: Dict[str, Any] = None,
         output_fn: Callable[[Any, ...], tf.Tensor] = None,
@@ -59,8 +59,8 @@ class PINNModule:
             self.opt = tf.keras.mixed_precision.LossScaleOptimizer(self.opt)
 
         if jit_compile:
-            self.train_step = tf.function(self.train_step, jit_compile=jit_compile)
-            self.eval_step = tf.function(self.eval_step, jit_compile=jit_compile)
+            self.train_step = tf.function(self.train_step, jit_compile=True)
+            self.eval_step = tf.function(self.eval_step, jit_compile=True)
         else:
             self.train_step = tf.function(self.train_step, jit_compile=False)
             self.eval_step = tf.function(self.eval_step, jit_compile=False)

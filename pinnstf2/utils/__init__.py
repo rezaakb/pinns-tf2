@@ -2,12 +2,12 @@ from pinnstf2.utils.gradient import (
     gradient,
     fwd_gradient
 )
-from pinnstf2.utils.optimizer import lbfgs_minimize
 from pinnstf2.utils.module_fn import (
     fix_extra_variables,
     sse,
     mse,
-    relative_l2_error
+    relative_l2_error,
+    fix_predictions,
 )
 from pinnstf2.utils.utils import (
     extras,

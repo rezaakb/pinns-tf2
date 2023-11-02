@@ -88,3 +88,8 @@ def fix_extra_variables(trainable_variables, extra_variables, dtype):
         extra_variables_dict[key] = variable
         trainable_variables.append(variable)
     return trainable_variables, extra_variables_dict
+
+def fix_predictions(preds_dict):
+    for sol_key, pred in preds_dict.items():
+        preds_dict[sol_key] = pred.numpy()
+    return preds_dict

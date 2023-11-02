@@ -36,7 +36,6 @@ class Trainer:
         self.check_val_every_n_epoch = check_val_every_n_epoch
         self.callback_metrics = {}
         self.current_epoch = 0
-        self.accelerator = accelerator
         self.default_root_dir = default_root_dir
         self.time_list = []
 

@@ -5,9 +5,6 @@ default_root_dir: ${paths.output_dir}
 min_epochs: 1 # prevents early stopping
 max_epochs: 10
 
-accelerator: cpu
-devices: 1
-
 enable_progress_bar: true
 
 # mixed precision for extra speed-up

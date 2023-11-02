@@ -20,8 +20,8 @@ PINNs-TF2 is a Python package built on the TensorFlow V2 framework. It not only 
 <div align="center">
 <img src="http://drive.google.com/uc?export=view&id=1vGb-wuPI1bAEsD_5CKtUPUHq8cC1J32X" width="1000">
 </br>
-<em>Each subplot corresponds to a distinct problem, with its iteration count displayed at the
-top. The logarithmic x-axis denotes the speed-up factor w.r.t the original code in TensorFlow v1, and the y-axis illustrates the mean relative error.</em>
+<em>Each subplot corresponds to a problem, with its iteration count displayed at the
+top. The logarithmic x-axis shows the speed-up factor w.r.t the original code in TensorFlow v1, and the y-axis illustrates the mean relative error.</em>
 </div>
 </br>
 

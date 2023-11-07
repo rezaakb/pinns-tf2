@@ -11,7 +11,6 @@ from omegaconf import DictConfig, OmegaConf
 
 rootutils.setup_root(__file__, dotenv=True, pythonpath=True)
 
-
 from pinnstf2.trainer import Trainer
 from pinnstf2 import utils
 from pinnstf2.models import PINNModule

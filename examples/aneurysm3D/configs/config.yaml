@@ -31,7 +31,6 @@ val_dataset:
   - mesh_sampler:
       _target_: pinnstf2.data.MeshSampler
       _partial_: true
-      idx_t: 100
       solution:
         - c
         - u
@@ -40,6 +39,18 @@ val_dataset:
         - p
 
 test_dataset:
+  - mesh_sampler:
+      _target_: pinnstf2.data.MeshSampler
+      _partial_: true
+      idx_t: 100
+      solution:
+        - c
+        - u
+        - v
+        - w
+        - p
+
+pred_dataset:
   - mesh_sampler:
       _target_: pinnstf2.data.MeshSampler
       _partial_: true
@@ -65,7 +76,6 @@ model:
   loss_fn: mse
 
 trainer:
-  accelerator: gpu
   max_epochs: 10000
   check_val_every_n_epoch: 100
 

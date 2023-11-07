@@ -86,7 +86,6 @@ model:
   runge_kutta: ${runge_kutta}
 
 trainer:
-  accelerator: gpu
   max_epochs: 100000
   check_val_every_n_epoch: 100001
 

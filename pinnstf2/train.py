@@ -9,7 +9,8 @@ import tensorflow as tf
 
 from omegaconf import DictConfig, OmegaConf
 
-rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
+rootutils.setup_root(__file__, dotenv=True, pythonpath=True)
+
 
 from pinnstf2.trainer import Trainer
 from pinnstf2 import utils
@@ -165,7 +166,6 @@ def train(
             preds_dict = trainer.predict(
                 model=model, datamodule=datamodule
             )
-            preds_dict = utils.fix_predictions(preds_dict)
             hydra.utils.instantiate(
                 cfg.plotting,
                 mesh=mesh,
@@ -182,7 +182,7 @@ def train(
     return metric_dict, object_dict
 
 
-@hydra.main(version_base="1.3", config_path="../configs", config_name="train.yaml")
+@hydra.main(version_base="1.3", config_path="conf", config_name="train.yaml")
 def main(cfg: DictConfig) -> Optional[float]:
     """Main entry point for training.
 

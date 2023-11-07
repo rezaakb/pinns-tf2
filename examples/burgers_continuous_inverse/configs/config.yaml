@@ -50,7 +50,6 @@ net:
     - u
 
 trainer:
-  accelerator: gpu
   max_epochs: 40000
   check_val_every_n_epoch: 40001
 

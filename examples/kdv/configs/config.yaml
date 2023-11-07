@@ -88,7 +88,6 @@ model:
     l2: -6.0
 
 trainer:
-  accelerator: gpu
   max_epochs: 50000
   check_val_every_n_epoch: 50001
 

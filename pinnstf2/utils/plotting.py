@@ -1,3 +1,4 @@
+import os
 import logging
 from itertools import combinations, product
 
@@ -52,8 +53,9 @@ def savefig(filename, crop=True):
     :param filename: Name of the output file (without extension).
     :param crop: Whether to apply tight cropping to the saved image (default is True).
     """
-
-    log.info(f"Image saved at {filename}")
+    dir_name = os.path.dirname(filename)
+    if dir_name and not os.path.exists(dir_name):
+        os.makedirs(dir_name)
 
     if crop:
         plt.savefig(f"{filename}.pdf", bbox_inches="tight", pad_inches=0)
@@ -61,6 +63,8 @@ def savefig(filename, crop=True):
     else:
         plt.savefig(f"{filename}.pdf")
         plt.savefig(f"{filename}.eps")
+
+    log.info(f"Image saved at {filename}")
 
 
 def plot_navier_stokes(mesh, preds, train_datasets, val_dataset, file_name):

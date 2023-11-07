@@ -123,7 +123,7 @@ class SamplerBase:
         :return: The number of sampled data points.
         """
 
-        return len(self.spatial_domain_sampled[0])
+        return len(self.time_domain_sampled)
 
     def __getitem__(self, idx):
         """Get a specific sampled data point using indexing. In some cases, we may not have

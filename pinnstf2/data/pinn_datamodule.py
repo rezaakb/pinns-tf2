@@ -56,7 +56,10 @@ class PINNDataModule:
                 if not isinstance(self.val_datasets, list):
                     self.val_datasets = [self.val_datasets]
                 for val_dataset in self.val_datasets:
-                    self.val_data[str(val_dataset.loss_fn)] = val_dataset[:]
+                    if self.batch_size is not None:
+                        self.val_data[str(val_dataset.loss_fn)] = val_dataset
+                    else:
+                        self.val_data[str(val_dataset.loss_fn)] = val_dataset[:]
                     self.function_mapping[str(val_dataset.loss_fn)] = val_dataset.loss_fn
                     self.val_solution_names.extend(val_dataset.solution_names)
 

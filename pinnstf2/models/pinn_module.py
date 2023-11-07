@@ -180,7 +180,7 @@ class PINNModule:
         :param batch_idx: The index of the current batch.
         """
         
-        loss, error_dict, preds = self.eval_step(batch)
+        loss, error_dict, _ = self.eval_step(batch)
         
         return loss, error_dict    
     
@@ -191,7 +191,7 @@ class PINNModule:
         :param batch_idx: The index of the current batch.
         """
 
-        loss, error, preds = self.eval_step(batch)
+        loss, error, _ = self.eval_step(batch)
 
         return loss, error
                 
@@ -202,7 +202,7 @@ class PINNModule:
         :param batch_idx: The index of the current batch.
         """
 
-        loss, error, preds = self.eval_step(batch)
+        _, _, preds = self.eval_step(batch)
 
         return preds
                 

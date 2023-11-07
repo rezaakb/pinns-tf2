@@ -78,7 +78,6 @@ net:
   discrete: ${discrete}
 
 trainer:
-  accelerator: gpu
   max_epochs: 10000
   check_val_every_n_epoch: 1000
 

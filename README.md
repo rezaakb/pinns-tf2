@@ -8,7 +8,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rezaakb/pinns-tf2/blob/main/tutorials/0-Schrodinger.ipynb)
 
-<a href="">[Paper]</a> - <a href="https://github.com/rezaakb/pinns-torch">[PyTorch]</a> - <a href="https://github.com/maziarraissi/PINNs">[TensorFlow v1]</a>
+<a href="https://arxiv.org/abs/2311.03626">[Paper]</a> - <a href="https://github.com/rezaakb/pinns-torch">[PyTorch]</a> - <a href="https://github.com/maziarraissi/PINNs">[TensorFlow v1]</a>
 </div>
 
 ## Description
@@ -95,5 +95,12 @@ We employed [this template](https://github.com/ashleve/lightning-hydra-template)
 ## Citation
 
 ```
-...
+@misc{bafghi2023pinnstf2,
+      title={PINNs-TF2: Fast and User-Friendly Physics-Informed Neural Networks in TensorFlow V2}, 
+      author={Reza Akbarian Bafghi and Maziar Raissi},
+      year={2023},
+      eprint={2311.03626},
+      archivePrefix={arXiv},
+      primaryClass={cs.CE}
+}
 ```

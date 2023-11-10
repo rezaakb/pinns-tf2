@@ -26,7 +26,7 @@ top. The logarithmic x-axis shows the speed-up factor w.r.t the original code in
 
 For more information, please refer to our paper:
 
-<a href="">PINNs-TF2: Fast and User-Friendly Physics-Informed Neural Networks in TensorFlow V2.</a> Reza Akbarian Bafghi, and Maziar Raissi. ML4PS, NeurIPS, 2023.
+<a href="https://arxiv.org/abs/2311.03626">PINNs-TF2: Fast and User-Friendly Physics-Informed Neural Networks in TensorFlow V2.</a> Reza Akbarian Bafghi, and Maziar Raissi. ML4PS, NeurIPS, 2023.
 
 ## Installation
 

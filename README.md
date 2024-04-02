@@ -95,10 +95,12 @@ We employed [this template](https://github.com/ashleve/lightning-hydra-template)
 ## Citation
 
 ```
-@inproceedings{Bafghi2023PINNsTF2FA,
+@article{AkbarianBafghi2023PINNsTF2FA,
   title={PINNs-TF2: Fast and User-Friendly Physics-Informed Neural Networks in TensorFlow V2},
   author={Reza Akbarian Bafghi and Maziar Raissi},
+  journal={ArXiv},
   year={2023},
+  volume={abs/2311.03626},
   url={https://api.semanticscholar.org/CorpusID:265043331}
 }
 ```

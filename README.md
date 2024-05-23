@@ -8,7 +8,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rezaakb/pinns-tf2/blob/main/tutorials/0-Schrodinger.ipynb)
 
-<a href="https://arxiv.org/abs/2311.03626">[Paper]</a> - <a href="https://github.com/rezaakb/pinns-torch">[PyTorch]</a> - <a href="https://github.com/maziarraissi/PINNs">[TensorFlow v1]</a>
+<a href="https://arxiv.org/abs/2311.03626">[Paper]</a> - <a href="https://github.com/rezaakb/pinns-torch">[PyTorch]</a> - <a href="https://github.com/rezaakb/pinns-jax">[JAX]</a> - <a href="https://github.com/maziarraissi/PINNs">[TensorFlow v1]</a>
 </div>
 
 ## Description
